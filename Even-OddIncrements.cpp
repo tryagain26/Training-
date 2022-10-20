@@ -17,31 +17,66 @@ int main(){
 		
 		long long sumE = 0;
 		long long sumO = 0;
-		int x;
-		int cntE = 0, int cntO = 0;
+		int x, cntE = 0, cntO =0;
+		
 		for(int i = 0 ; i < n ; i++){
 			
 			cin >> x;
-			if(A[i]&1){
-				sumO+=A[i];
+			if(x%2!=0){
+				sumO+= x;
 				cntO++;
-		
 			}else{
+				sumE += x;
 				cntE++;
-				sumE += A[i];
 			}
+		}
+		long long ans;
+		while(q--){
+			int op, val;
+			cin >> op >> val;
+			if(op == 0){
+				
+
+				
+				sumE += val*(cntE);
+				if(val%2!=0){
+					cntO = n;
+					cntE = 0;
+					sumO += sumE;
+					sumE = 0;
+				}
+			}else{
+				
+				sumO += val*(cntO);
+				if(val%2!=0){
+					cntE = n;
+					cntO= 0;
+					sumE+= sumO;
+					sumO = 0;
+
+				}
+			}
+			ans = sumO + sumE;
+			cout << ans << "\n";
 		}
 
-		int x, val;
-		
-		while(q--){
-			cin >> x >> val;
-			if(x==0){
-				sumE += cntE*(val);
-			}else{
-				sumO += cntO*val;
-			}
-		}
+		/*1 3 2 4 10 48
+		1 6
+		0 5
+		0 4
+		0 5
+		1 3
+		0 12
+		0 1
+		4 64 
+		16 64 
+		100 0 
+		100 0 
+		100 0 
+		0 118 
+
+		*/
+
 	}
 	return 0;
 }
